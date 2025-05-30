@@ -85,7 +85,7 @@ export default function PasswordManager() {
                     <div className="flex items-center justify-center mb-6"><Logo /></div>
                     {!user
                         ? <div className="flex items-center justify-center mb-6">
-                            <GoogleAuth prefix="Continue with" />
+                            <GoogleAuth />
                         </div>
                         : <Fragment>
                             <div className="flex w-full md:flex-row flex-col md:space-x-3">
