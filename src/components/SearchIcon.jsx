@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export default function SearchIcon(props) {
+export default function SearchIcon() {
     return (
         <>
             <button className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-cyan-400 rounded-full p-3 shadow-lg cursor-pointer">

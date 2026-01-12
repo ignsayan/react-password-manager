@@ -1,8 +1,8 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
     deletePassword
-} from '../modules/password/slices'
+} from '../modules/password/slices';
 
 export default function TrashIcon({ data }) {
 

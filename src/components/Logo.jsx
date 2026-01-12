@@ -1,6 +1,6 @@
-import React from 'react'
-import reactLogo from '../assets/icon/react.svg'
-import '../assets/css/logo.css'
+import React from 'react';
+import reactLogo from '../assets/icon/react.svg';
+import '../assets/css/logo.css';
 
 export default function Logo({ redirect }) {
     return (

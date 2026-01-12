@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function CheckBox({ style, labelClass, value, toggle, label }) {
 

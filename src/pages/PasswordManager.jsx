@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleAuth from '../components/GoogleAuth';
 import useEncrypt, { useDecrypt } from '../hooks/useEncrypt';
@@ -6,8 +6,10 @@ import {
     fetchPasswords,
     savePassword,
 } from '../modules/password/slices/index';
+import { logout } from '../modules/authentication/reducer';
 import {
     Logo,
+    LogoutIcon,
     PasswordSkeleton,
     RangeSlider,
     CheckBox,
@@ -65,9 +67,8 @@ export default function PasswordManager() {
 
     const handleSearch = (form) => {
         const key = form.get('account');
-        const result = passwords.filter(
-            (password) =>
-                password.account.toLowerCase().includes(key.toLowerCase())
+        const result = passwords.filter((password) =>
+            password.account.toLowerCase().includes(key.toLowerCase())
         );
         setFilteredPasswords(result);
         setVisibility({});
@@ -81,13 +82,15 @@ export default function PasswordManager() {
         <>
             <div className="bg-gray-900 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
                 <div className="w-full max-w-lg sm:max-w-3xl mx-auto bg-gray-800 rounded-2xl shadow-lg p-4 sm:p-6">
-                    <h1 className="text-2xl sm:text-3xl text-center text-yellow-400 mb-3">Password Manager</h1>
+                    <div className="flex items-center justify-between mb-4">
+                        <h1 className="text-xl sm:text-3xl text-yellow-400 text-left sm:text-center w-full">
+                            Password Manager
+                        </h1>
+                        {user && <LogoutIcon action={dispatch(logout())} />}
+                    </div>
                     <div className="flex items-center justify-center mb-6"><Logo /></div>
-                    {!user
-                        ? <div className="flex items-center justify-center mb-6">
-                            <GoogleAuth />
-                        </div>
-                        : <Fragment>
+                    {user ?
+                        <Fragment>
                             <div className="flex w-full md:flex-row flex-col md:space-x-3">
                                 <div className="relative w-full md:w-1/2">
                                     <form action={handleSearch}>
@@ -148,8 +151,8 @@ export default function PasswordManager() {
                                 </div>
                             </div>
 
-                            {loading ? <PasswordSkeleton />
-                                : <ul className="space-y-2 mt-6">
+                            {!loading ?
+                                <ul className="space-y-2 mt-6">
                                     {filteredPasswords.map((password) =>
                                         <Fragment key={password._id}>
                                             <li className="flex items-center justify-between bg-gray-700 border border-gray-700 rounded-full shadow-lg p-2 hover:bg-gray-600">
@@ -167,8 +170,12 @@ export default function PasswordManager() {
                                         </Fragment>
                                     )}
                                 </ul>
+                                : <PasswordSkeleton />
                             }
                         </Fragment>
+                        : <div className="flex items-center justify-center mb-6">
+                            <GoogleAuth />
+                        </div>
                     }
                 </div>
             </div>
