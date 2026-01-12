@@ -2,11 +2,11 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import GoogleAuth from '../components/GoogleAuth';
 import useEncrypt, { useDecrypt } from '../hooks/useEncrypt';
+import { logout } from '../modules/authentication/reducer';
 import {
     fetchPasswords,
     savePassword,
 } from '../modules/password/slices/index';
-import { logout } from '../modules/authentication/reducer';
 import {
     Logo,
     LogoutIcon,
@@ -86,7 +86,7 @@ export default function PasswordManager() {
                         <h1 className="text-xl sm:text-3xl text-yellow-400 text-left sm:text-center w-full">
                             Password Manager
                         </h1>
-                        {user && <LogoutIcon action={dispatch(logout())} />}
+                        {/* {user && <LogoutIcon action={dispatch(logout())} />} */}
                     </div>
                     <div className="flex items-center justify-center mb-6"><Logo /></div>
                     {!user
