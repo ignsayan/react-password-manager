@@ -22,15 +22,15 @@ export default function PasswordManager() {
 
     const { user } = useSelector((state) => state.authentication);
     const { passwords, loading } = useSelector((state) => state.password);
-    const dispatch = useDispatch();
-    const [filteredPasswords, setFilteredPasswords] = useState([]);
 
+    const [filteredPasswords, setFilteredPasswords] = useState([]);
     const [password, setPassword] = useState('');
     const [length, setLength] = useState(16);
     const [isAllowedCharacter, setIsAllowedCharacter] = useState(true);
     const [isAllowedNumber, setIsAllowedNumber] = useState(false);
-
     const [visibility, setVisibility] = useState({});
+
+    const dispatch = useDispatch();
     const account = useRef(null);
 
     useEffect(() => {
@@ -56,6 +56,7 @@ export default function PasswordManager() {
     useEffect(() => { generatePassword() },
         [length, isAllowedCharacter, isAllowedNumber]
     )
+
     const handleFormSubmit = () => {
         const data = {
             account: account.current.value,
@@ -88,7 +89,9 @@ export default function PasswordManager() {
                         </h1>
                         {user && <LogoutIcon action={() => dispatch(logout())} />}
                     </div>
-                    <div className="flex items-center justify-center mb-6"><Logo /></div>
+                    <div className="flex items-center justify-center mb-6">
+                        <Logo />
+                    </div>
                     {user
                         ? <Fragment>
                             <div className="flex w-full md:flex-row flex-col md:space-x-3">
