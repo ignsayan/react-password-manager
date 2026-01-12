@@ -154,8 +154,8 @@ export default function PasswordManager() {
                                 </div>
                             </div>
 
-                            {!loading ?
-                                <ul className="space-y-2 mt-6">
+                            {loading ? <PasswordSkeleton />
+                                : <ul className="space-y-2 mt-6">
                                     {filteredPasswords.map((password) =>
                                         <Fragment key={password._id}>
                                             <li className="flex items-center justify-between bg-gray-700 border border-gray-700 rounded-full shadow-lg p-2 hover:bg-gray-600">
@@ -173,7 +173,7 @@ export default function PasswordManager() {
                                         </Fragment>
                                     )}
                                 </ul>
-                                : <PasswordSkeleton />
+
                             }
                         </Fragment>
                     }
