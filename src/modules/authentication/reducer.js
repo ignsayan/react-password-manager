@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Cookies from 'js-cookie';
 
 const initialState = {
-    user: Cookies.get('USER') || null,
+    user: localStorage.getItem('USER') || null,
     loading: false,
 }
 
@@ -15,12 +14,12 @@ export const authSlice = createSlice({
         },
         attemptLogin: (state, action) => {
             const user = action.payload
-            Cookies.set('USER', user._id)
+            localStorage.setItem('USER', user._id)
             state.user = user
             state.loading = false
         },
         logout: (state) => {
-            Cookies.remove('USER')
+            localStorage.removeItem('USER')
             state.user = null
         }
     }
