@@ -89,8 +89,11 @@ export default function PasswordManager() {
                         {user && <LogoutIcon action={dispatch(logout())} />}
                     </div>
                     <div className="flex items-center justify-center mb-6"><Logo /></div>
-                    {user ?
-                        <Fragment>
+                    {!user
+                        ? <div className="flex items-center justify-center mb-6">
+                            <GoogleAuth />
+                        </div>
+                        : <Fragment>
                             <div className="flex w-full md:flex-row flex-col md:space-x-3">
                                 <div className="relative w-full md:w-1/2">
                                     <form action={handleSearch}>
@@ -173,9 +176,6 @@ export default function PasswordManager() {
                                 : <PasswordSkeleton />
                             }
                         </Fragment>
-                        : <div className="flex items-center justify-center mb-6">
-                            <GoogleAuth />
-                        </div>
                     }
                 </div>
             </div>
