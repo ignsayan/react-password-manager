@@ -1,6 +1,12 @@
 import React from 'react';
 
-export default function CheckBox({ style, labelClass, value, toggle, label }) {
+export default function CheckBox({
+    style,
+    labelClass,
+    value,
+    toggle,
+    label,
+}) {
 
     return (
         <>

@@ -1,19 +1,17 @@
+import Header from './Header';
+import SearchArea from './SearchArea';
+import FormInput from './FormInput';
 import CheckBox from '../components/Checkbox';
-import Logo from '../components/Logo';
-import LogoutIcon from './LogoutIcon';
-import RangeSlider from '../components/RangeSlider';
+import PasswordGenerator from './PasswordGenerator';
 import PasswordSkeleton from '../loaders/PasswordSkeleton';
-import SearchIcon from './SearchIcon';
-import TrashIcon from './TrashIcon';
-import ViewIcon from './ViewIcon';
+import PasswordList from '../components/PasswordList';
 
 export {
-    Logo,
-    LogoutIcon,
-    RangeSlider,
+    Header,
+    SearchArea,
+    FormInput,
     CheckBox,
+    PasswordGenerator,
     PasswordSkeleton,
-    SearchIcon,
-    TrashIcon,
-    ViewIcon,
+    PasswordList,
 }
