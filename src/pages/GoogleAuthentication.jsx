@@ -9,7 +9,7 @@ import {
     attemptLogin,
 } from '../modules/authentication/reducer';
 
-export default function GoogleAuth() {
+export default function GoogleAuthentication() {
 
     const { loading } = useSelector((state) => state.authentication);
     const dispatch = useDispatch();

@@ -5,6 +5,7 @@ import { useDecrypt } from '../hooks/useEncrypt';
 export default function PasswordList({
     passwords,
     loading,
+    deletePassword,
     toggleVisibility,
     visibility,
 }) {
@@ -38,7 +39,9 @@ export default function PasswordList({
                                     <span className="text-white cursor-pointer mx-3">
                                         {visibility[password._id]
                                             ? useDecrypt(password.password)
-                                            : password.account
+                                            : password.account.length > 20
+                                                ? password.account.slice(0, 20) + '...'
+                                                : password.account
                                         }
                                     </span>
                                 </div>
@@ -47,7 +50,7 @@ export default function PasswordList({
                                     className="bg-rose-600 font-medium px-4 py-2 rounded-full hover:text-white shadow-lg text-sm"
                                     onClick={() => {
                                         if (confirm(`Are you sure you want to delete the password for ${password.account}?`)) {
-                                            dispatch(deletePassword(password._id));
+                                            deletePassword(password._id);
                                         }
                                     }}
                                 >

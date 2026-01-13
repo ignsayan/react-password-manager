@@ -1,11 +1,12 @@
-import GoogleAuth from './GoogleAuth';
+import GoogleAuthentication from './GoogleAuthentication';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useEncrypt from '../hooks/useEncrypt';
 import { logout } from '../modules/authentication/reducer';
 import {
-    fetchPasswords,
     savePassword,
+    fetchPasswords,
+    deletePassword,
 } from '../modules/password/slices/index';
 import {
     Header,
@@ -40,7 +41,6 @@ export default function PasswordManager() {
 
     let tempPass = '';
     let string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-
     if (isAllowedCharacter) string += '!@#$%^&*(){}[]';
     if (isAllowedNumber) string += '0123456789';
 
@@ -72,53 +72,49 @@ export default function PasswordManager() {
         setVisibility({});
     }
 
-    const toggleVisibility = (id) => {
-        setVisibility((prev) => ({ ...prev, [id]: !prev[id] }));
-    }
-
     return (
         <>
             <div className="bg-gray-900 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
-                <div className="w-full max-w-lg sm:max-w-3xl mx-auto bg-gray-800 rounded-2xl shadow-lg p-4 sm:p-6">
+                <div className="relative w-full max-w-lg sm:max-w-3xl mx-auto bg-gray-800 rounded-2xl shadow-lg p-4 sm:p-6">
 
                     <Header
                         action={() => dispatch(logout())}
                         user={user}
                     />
 
-                    {user ?
-                        <Fragment>
-                            <div className="flex w-full md:flex-row flex-col md:space-x-3">
-                                <SearchArea
-                                    action={handleSearch}
-                                    reference={account}
-                                />
-                                <FormInput
-                                    action={handleFormSubmit}
-                                    event={(e) => setPassword(e.target.value)}
-                                    value={password}
-                                />
-                            </div>
-
-                            <PasswordGenerator
-                                length={length}
-                                lengthToggle={(e) => setLength(e.target.value)}
-                                allowedCharacter={isAllowedCharacter}
-                                charToggle={() => setIsAllowedCharacter((toggle) => !toggle)}
-                                allowedNumber={isAllowedNumber}
-                                numToggle={() => setIsAllowedNumber((toggle) => !toggle)}
+                    {user ? <Fragment>
+                        <div className="flex w-full md:flex-row flex-col md:space-x-3">
+                            <SearchArea
+                                action={handleSearch}
+                                reference={account}
                             />
-
-                            <PasswordList
-                                passwords={filteredPasswords}
-                                loading={loading}
-                                toggleVisibility={toggleVisibility}
-                                visibility={visibility}
+                            <FormInput
+                                action={handleFormSubmit}
+                                event={(e) => setPassword(e.target.value)}
+                                value={password}
                             />
-                        </Fragment>
+                        </div>
+
+                        <PasswordGenerator
+                            length={length}
+                            lengthToggle={(e) => setLength(e.target.value)}
+                            allowedCharacter={isAllowedCharacter}
+                            charToggle={() => setIsAllowedCharacter(toggle => !toggle)}
+                            allowedNumber={isAllowedNumber}
+                            numToggle={() => setIsAllowedNumber(toggle => !toggle)}
+                        />
+
+                        <PasswordList
+                            loading={loading}
+                            passwords={filteredPasswords}
+                            deletePassword={(id) => dispatch(deletePassword(id))}
+                            toggleVisibility={(id) => setVisibility(prev => ({ [id]: !prev[id] }))}
+                            visibility={visibility}
+                        />
+                    </Fragment>
 
                         : <div className="flex items-center justify-center mb-6">
-                            <GoogleAuth />
+                            <GoogleAuthentication />
                         </div>
                     }
                 </div>
