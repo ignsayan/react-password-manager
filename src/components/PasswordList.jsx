@@ -23,7 +23,8 @@ export default function PasswordList({
 
                                 <div className="w-full flex items-center">
                                     <button onClick={() => toggleVisibility(password._id)}
-                                        className="bg-amber-500 p-2 rounded-full font-medium shadow-lg flex items-center justify-center">
+                                        className="bg-amber-500 font-medium p-2 rounded-full
+                                        hover:bg-amber-600 shadow-lg">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-5 w-5 text-gray-800"
@@ -40,21 +41,34 @@ export default function PasswordList({
                                         {visibility[password._id]
                                             ? useDecrypt(password.password)
                                             : password.account.length > 20
-                                                ? password.account.slice(0, 23) + ' ...'
+                                                ? password.account.slice(0, 30) + ' ...'
                                                 : password.account
                                         }
                                     </span>
                                 </div>
 
                                 <button
-                                    className="bg-rose-600 font-medium px-4 py-2 rounded-full hover:text-white shadow-lg text-sm"
+                                    className="bg-rose-600 font-medium p-2 rounded-full
+                                    hover:bg-rose-700 shadow-lg"
                                     onClick={() => {
                                         if (confirm(`Are you sure you want to delete the password for ${password.account}?`)) {
                                             deletePassword(password._id);
                                         }
                                     }}
                                 >
-                                    Delete
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-5 w-5"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="3"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
                                 </button>
                             </li>
                         </Fragment>
