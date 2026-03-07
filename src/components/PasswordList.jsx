@@ -41,7 +41,7 @@ export default function PasswordList({
                                         {visibility[password._id]
                                             ? useDecrypt(password.password)
                                             : password.account.length > 20
-                                                ? password.account.slice(0, 30) + ' ...'
+                                                ? password.account.slice(0, 26) + ' ...'
                                                 : password.account
                                         }
                                     </span>
